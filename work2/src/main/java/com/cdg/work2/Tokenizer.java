@@ -7,7 +7,7 @@ import java.util.StringTokenizer;
 public class Tokenizer {
 	private BufferedReader reader;
 	private String data="";
-	private StringTokenizer st;
+	private StringTokenizer token;
 	private Checker check = new Checker();
 	private Writer writer;
 	
@@ -21,14 +21,14 @@ public class Tokenizer {
 	public void make() throws IOException{
 		String tmp="";
 		while((data = reader.readLine()) != null){
-			st=new StringTokenizer(data);
-			while(st.hasMoreTokens()){
-				String str = st.nextToken();
+			token=new StringTokenizer(data);
+			while(token.hasMoreTokens()){
+				String str = token.nextToken();
 				System.out.println(str);
 				if(check.check(str)){
 					writer.write(str+" ");
-					if(st.hasMoreTokens()){
-						if(check.nextCheck(tmp=st.nextToken())){
+					if(token.hasMoreTokens()){
+						if(check.nextCheck(tmp=token.nextToken())){
 							switch(check.whatPattern()){
 								case 0:
 									writer.write("******-******* ");
