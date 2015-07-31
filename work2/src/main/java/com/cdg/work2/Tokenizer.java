@@ -19,23 +19,41 @@ public class Tokenizer {
 	}
 	
 	public void make() throws IOException{
+		String tmp="";
 		while((data = reader.readLine()) != null){
 			st=new StringTokenizer(data);
 			while(st.hasMoreTokens()){
 				String str = st.nextToken();
 				System.out.println(str);
 				if(check.check(str)){
+					writer.write(str+" ");
 					if(st.hasMoreTokens()){
-						if(check.nextCheck(st.nextToken())){
-								System.out.println("번호도 찾음");
-								writer.write("***-***");
+						if(check.nextCheck(tmp=st.nextToken())){
+							switch(check.whatPattern()){
+								case 0:
+									writer.write("******-******* ");
+									break;
+								case 1:
+									writer.write("***-****-**** ");
+									break;
+								case 2:
+									writer.write("****-****-**** ");
+									break;
+								case 3:
+									writer.write("**-******-** ");
+									break;
+							}
+						}
+						else{
+							writer.write(tmp+" ");
 						}
 					}
 				}
 				else{
-					writer.write(str);
+					writer.write(str+" ");
 				}
 			}
+			writer.write("\r\n");
 		}
 	}
 }

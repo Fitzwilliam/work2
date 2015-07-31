@@ -5,6 +5,7 @@ import java.util.regex.Pattern;
 
 public class Checker {
 	private String str;
+	private int whichPattern;
 	private String[] pattern = {"주민등록번호", "전화번호", "신용카드번호", "운전면허번호"};
 	private String[] nextPattern = {"(\\d{6})-(\\d{7})","(\\d{3})-(\\d{3,4})-(\\d{4})",
 									"(\\d{4})-(\\d{4})-(\\d{4})-(\\d{4})","(\\d{2})-(\\d{6})-(\\d{2})"
@@ -25,11 +26,14 @@ public class Checker {
 			Pattern p = Pattern.compile(nextPattern[i]);
 			Matcher m = p.matcher(nextData);
 			while(m.find()){
-				System.out.println(m.group());
+				whichPattern = i;
 				return true;
 			}
 		}
 		return false;
+	}
+	public int whatPattern(){
+		return whichPattern;
 	}
 		
 		//체크에 따라서 다음 토큰의 숫자 정규식을 확인하고, 맞다면 그 다음을 ***로 저장. false인 경우엔 그냥 그대로 저장
